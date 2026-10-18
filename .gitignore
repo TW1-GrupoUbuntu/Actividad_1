@@ -1,0 +1,12 @@
+.env
+informe/
+docs/
+evidencias/
+*.pdf
+*.docx
+ENLACES_DISPONIBLES.txt
+__pycache__/
+*.log
+.vscode/
+.DS_Store
+Thumbs.db

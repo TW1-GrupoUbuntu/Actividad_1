@@ -1,0 +1,45 @@
+# Entorno de la Actividad 1 (U.E. Horizonte): servidor Ubuntu 24.04 con systemd + cliente de pruebas.
+#   docker compose up -d --build     # construye y enciende los dos contenedores
+#   bash scripts/levantar.sh         # aplica la configuración de los laboratorios 2, 3 y 4
+#   bash scripts/verificar_todo.sh   # comprueba todo
+services:
+  servidor:
+    build: .
+    image: horizonte-actividad1:24.04
+    hostname: srv-horizonte
+    privileged: true          # necesario para que systemd funcione dentro del contenedor
+    cgroup: host              # requiere cgroup v2 (Docker Engine reciente o Docker Desktop)
+    tmpfs: [/run, /run/lock, /tmp]
+    ports:
+      - "${PUERTO_HTTP:-8080}:80"   # http://localhost:8080 -> Nginx del servidor
+    volumes:
+      - .:/repo:ro                  # el repositorio, solo lectura, para los scripts
+      - home:/home
+    networks:
+      horizonte:
+        ipv4_address: 192.168.56.10
+
+  cliente:
+    build: .
+    image: horizonte-actividad1:24.04
+    hostname: cliente
+    command: sleep infinity       # contenedor de pruebas (curl, dig, ping) en la misma red
+    stop_signal: SIGKILL
+    extra_hosts:                  # nombres del colegio apuntan al servidor
+      - "www.horizonte.internal:192.168.56.10"
+      - "horizonte.internal:192.168.56.10"
+      - "portal.horizonte.internal:192.168.56.10"
+    depends_on: [servidor]
+    networks:
+      horizonte:
+        ipv4_address: 192.168.56.20
+
+networks:
+  horizonte:
+    ipam:
+      config:
+        - subnet: 192.168.56.0/24
+          gateway: 192.168.56.1
+
+volumes:
+  home:
