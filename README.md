@@ -159,7 +159,6 @@ Grupo Ubuntu, Tecnología Web I, Ingeniería de Sistemas, Universidad Privada Do
 - Sarai Alejandra Vidaurre
 - Maria Lizeth Marcelo Carlos
 - Camila Rebeca Mercado Duran
-- Jhon Walter Choque Condori
 - Ariel Davila
 - David Julian Balencia Ayala
 
