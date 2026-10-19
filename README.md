@@ -2,16 +2,6 @@
 
 Proyecto del grupo Ubuntu de la materia Tecnología Web I (UPDS). Reúne el trabajo de los laboratorios 2, 3 y 4 en un entorno que se levanta con Docker: un servidor Ubuntu 24.04 con systemd, administrado con `systemctl`, que publica dos sitios con Nginx, un portal de padres en PHP-FPM con sesiones seguras y una API de eco detrás de un proxy inverso.
 
-## Descripción
-
-La Unidad Educativa Horizonte (institución ficticia del curso) necesita un servidor web propio. El proyecto incluye:
-
-- **Laboratorio 2 – Administración del servidor:** nombre y zona horaria, paquetes base, usuario administrador `jhonc` con `sudo`, grupo `webadmin` con permisos `2775` para las carpetas del sitio, servicio SSH y red.
-- **Laboratorio 3 – Nginx:** dos hosts virtuales (`www.horizonte.internal` y `portal.horizonte.internal`), página por defecto que rechaza nombres desconocidos, páginas de error propias, caché de estáticos y registros (logs) con el tiempo de respuesta.
-- **Laboratorio 4 – Portal dinámico:** PHP-FPM, portal para padres con inicio de sesión, cookies y sesiones seguras (HttpOnly, SameSite) y proxy inverso hacia un backend de eco gestionado por systemd.
-
-Todo se aplica con scripts repetibles (idempotentes) y se comprueba con tres verificadores automáticos.
-
 ## Arquitectura
 
 ```mermaid
